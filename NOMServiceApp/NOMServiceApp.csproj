@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NOMServiceApp</RootNamespace>
     <AssemblyName>NOMServiceApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <UseIISExpress>true</UseIISExpress>
@@ -21,6 +22,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,12 +45,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
@@ -60,18 +64,57 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
+    <Content Include="Service\_test\TestService.svc" />
+    <Content Include="TestService.svc" />
     <Content Include="Web.config" />
+    <Content Include="wwwroot\appjs\_test\test.js" />
+    <Content Include="wwwroot\css\nom_style.css" />
+    <Content Include="wwwroot\node_modules\angular-base64\angular-base64.js" />
+    <Content Include="wwwroot\node_modules\angular-base64\angular-base64.min.js" />
+    <Content Include="wwwroot\node_modules\angular-base64\Gruntfile.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\angular-crypto.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\angular-crypto.min.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\example\index.html" />
+    <Content Include="wwwroot\node_modules\angular-crypto\Gruntfile.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\lib\base64\base64.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\lib\directives.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\lib\filters.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\lib\index.js" />
+    <Content Include="wwwroot\node_modules\angular-crypto\lib\md5\md5.js" />
+    <Content Include="wwwroot\node_modules\angular-oidc\bundle\oauth.js" />
+    <Content Include="wwwroot\node_modules\angular-oidc\license.txt" />
+    <Content Include="wwwroot\node_modules\angular-oidc\oauth-directives.js" />
+    <Content Include="wwwroot\node_modules\angular-oidc\oauth-module.js" />
+    <Content Include="wwwroot\node_modules\angular-oidc\oauth-service.js" />
+    <Content Include="wwwroot\node_modules\angular-oidc\oauth.js" />
+    <Content Include="wwwroot\node_modules\angular\angular-csp.css" />
+    <Content Include="wwwroot\node_modules\angular\angular.js" />
+    <Content Include="wwwroot\node_modules\angular\angular.min.js" />
+    <Content Include="wwwroot\node_modules\angular\index.js" />
+    <Content Include="wwwroot\node_modules\convert-hex\convert-hex.js" />
+    <Content Include="wwwroot\node_modules\convert-string\convert-string.js" />
+    <Content Include="wwwroot\node_modules\sha256\lib\nodecrypto.js" />
+    <Content Include="wwwroot\node_modules\sha256\lib\sha256.js" />
+    <Content Include="wwwroot\_test\test.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="ITestService.cs" />
+    <Compile Include="Business\_test\TestFunctionality.cs" />
+    <Compile Include="Common\_test\TestClass.cs" />
+    <Compile Include="Persistence\Persister.cs" />
+    <Compile Include="Persistence\_test\TestClassPersister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\_test\ITestService.cs" />
+    <Compile Include="Service\_test\TestService.svc.cs">
+      <DependentUpon>TestService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="TestService.svc.cs">
+      <DependentUpon>TestService.svc</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
@@ -80,12 +123,54 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="wwwroot\node_modules\angular-base64\bower.json" />
+    <Content Include="wwwroot\node_modules\angular-base64\LICENSE" />
+    <Content Include="wwwroot\node_modules\angular-base64\package.json" />
+    <Content Include="wwwroot\node_modules\angular-base64\README.md" />
+    <Content Include="wwwroot\node_modules\angular-crypto\.npmignore" />
+    <Content Include="wwwroot\node_modules\angular-crypto\angular-crypto.min.js.map" />
+    <Content Include="wwwroot\node_modules\angular-crypto\bower.json" />
+    <Content Include="wwwroot\node_modules\angular-crypto\package.json" />
+    <Content Include="wwwroot\node_modules\angular-crypto\README.md" />
+    <Content Include="wwwroot\node_modules\angular-oidc\build.bat" />
+    <Content Include="wwwroot\node_modules\angular-oidc\package.json" />
+    <Content Include="wwwroot\node_modules\angular-oidc\readme.md" />
+    <Content Include="wwwroot\node_modules\angular-oidc\tsconfig.json" />
+    <Content Include="wwwroot\node_modules\angular\angular.min.js.gzip" />
+    <Content Include="wwwroot\node_modules\angular\angular.min.js.map" />
+    <Content Include="wwwroot\node_modules\angular\bower.json" />
+    <Content Include="wwwroot\node_modules\angular\LICENSE.md" />
+    <Content Include="wwwroot\node_modules\angular\package.json" />
+    <Content Include="wwwroot\node_modules\angular\README.md" />
+    <Content Include="wwwroot\node_modules\convert-hex\.npmignore" />
+    <Content Include="wwwroot\node_modules\convert-hex\bower.json" />
+    <Content Include="wwwroot\node_modules\convert-hex\CHANGELOG.md" />
+    <Content Include="wwwroot\node_modules\convert-hex\component.json" />
+    <Content Include="wwwroot\node_modules\convert-hex\package.json" />
+    <Content Include="wwwroot\node_modules\convert-hex\README.md" />
+    <Content Include="wwwroot\node_modules\convert-string\.npmignore" />
+    <Content Include="wwwroot\node_modules\convert-string\bower.json" />
+    <Content Include="wwwroot\node_modules\convert-string\CHANGELOG.md" />
+    <Content Include="wwwroot\node_modules\convert-string\component.json" />
+    <Content Include="wwwroot\node_modules\convert-string\package.json" />
+    <Content Include="wwwroot\node_modules\convert-string\README.md" />
+    <Content Include="wwwroot\node_modules\sha256\.npmignore" />
+    <Content Include="wwwroot\node_modules\sha256\CHANGELOG.md" />
+    <Content Include="wwwroot\node_modules\sha256\package.json" />
+    <Content Include="wwwroot\node_modules\sha256\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\node_modules\angular-oidc\oauth.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
@@ -96,7 +181,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52099</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52099/</IISUrl>
+          <IISUrl>http://localhost:52098/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:52098/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8" />
+
+    <link href="../css/nom_style.css" rel="stylesheet" />
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../appjs/_test/test.js"></script>
+    
+    <title>Test page</title>
+</head>
+<body ng-app="TestApp">
+    <div ng-controller="initCtrl" class="initTest">
+        <form>
+            <div ng-controller="clockCtrl"><h1>Time is {{theTime}}</h1></div>
+            <br />
+            <br />
+            <ul>
+                <li>
+                    <input ng-model="testRequest.arg1" type="text" class="inputText logninpts" required />
+                    <span class="floating-label">Text</span>
+                </li>
+                <li>
+                    <input ng-model="testRequest.arg2" type="password" class="inputText logninpts" required />
+                    <span class="floating-label">Hiden Text</span>
+                </li>
+            </ul>
+            <br><button ng-click="testBtnOnClick()" class="testBtn">Run Test</button><br />
+        </form>
+        <div align="left"><span>{{pingResp}}</span></div>
+        <div>
+            <h1>{{testDataSetHeader}}</h1>
+            <table>
+                <tr ng-repeat="item in testDataSet">
+                    <td>{{ item.member1 }}</td>
+                    <td>{{ item.member2 }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
